@@ -1,0 +1,141 @@
+<div>
+    <div>
+
+    <span>Click here to add new entry        </span>
+    <button mat-raised-button (click)="addNewUser()">Add New User</button>
+    <br>
+    <span> or </span>
+    <br>
+    <span>Search for an existing user </span>
+
+    <form class="form">
+        <mat-form-field appearance="fill" (keyup.enter)="onSearch(member_no,member_name,category,branch,class)">
+          <mat-label>Member no</mat-label>
+          <input type="number"
+                 placeholder="Enter Member no."
+                 [(ngModel)]="member_no"
+                 matInput
+                 [formControl]="myControl">
+        </mat-form-field>
+        <mat-form-field appearance="fill">
+            <mat-label>Name</mat-label>
+            <input type="text"
+                   placeholder="Enter Member Name"
+                   [(ngModel)]="member_name"
+                   matInput
+                   [formControl]="myControl">
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Category</mat-label>
+            <input type="text"
+                   placeholder="Enter Category"
+                   [(ngModel)]="category"
+                   matInput
+                   [formControl]="myControl">
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Branch</mat-label>
+            <input type="text"
+                   placeholder="Enter Branch"
+                   [(ngModel)]="branch"
+                   matInput
+                   [formControl]="myControl">
+          </mat-form-field>
+          <mat-form-field appearance="fill">
+            <mat-label>Class</mat-label>
+            <input type="text"
+                   placeholder="Enter Class"
+                   [(ngModel)]="class"
+                   matInput
+                   [formControl]="myControl">
+          </mat-form-field>
+      </form>
+      
+    </div>
+    <mat-toolbar color="primary">
+        <mat-toolbar-row>
+          <span>Users</span>
+          <span class="spacer"></span> 
+          <div *ngIf="newEntry">
+          <button mat-icon-button (click)="onSave()">
+            <mat-icon>save</mat-icon>
+          </button>
+        </div>
+        </mat-toolbar-row>
+      </mat-toolbar>
+     
+      <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+ 
+        <ng-container matColumnDef="sno" sticky>
+          <mat-header-cell *matHeaderCellDef> S.no </mat-header-cell>
+          <mat-cell *matCellDef="let element; let i = index;"> {{ i+1 }} </mat-cell>
+        </ng-container>
+      
+ 
+        <ng-container matColumnDef="member_no">
+          <mat-header-cell *matHeaderCellDef>Member No.</mat-header-cell>
+          <mat-cell *matCellDef="let element; let i = index;">  
+          <mat-form-field floatLabel="never">
+            <input matInput placeholder="Member No." [value]="element.member_no" [(ngModel)]="element.member_no">
+          </mat-form-field>
+        </mat-cell>
+        </ng-container>
+      
+    
+        <ng-container matColumnDef="member_name">
+          <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+          <mat-form-field floatLabel="never">
+            <input matInput placeholder="Name" [value]="element.member_name" [(ngModel)]="element.member_name">
+          </mat-form-field>
+        </mat-cell>
+        </ng-container>
+      
+    
+        <ng-container matColumnDef="category">
+          <mat-header-cell *matHeaderCellDef> Category </mat-header-cell>
+          <mat-cell *matCellDef="let element"> 
+            <mat-form-field floatLabel="never">
+              <input matInput placeholder="Category" [value]="element.category" [(ngModel)]="element.category">
+            </mat-form-field>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="courseduration">
+            <mat-header-cell *matHeaderCellDef> Course Duration </mat-header-cell>
+            <mat-cell *matCellDef="let element"> 
+              <mat-form-field floatLabel="never">
+                <input matInput placeholder="Rate" [value]="element.course_duration" [(ngModel)]="element.course_duration">
+              </mat-form-field>
+            </mat-cell>
+         </ng-container>
+         <ng-container matColumnDef="class">
+            <mat-header-cell *matHeaderCellDef> Class </mat-header-cell>
+            <mat-cell *matCellDef="let element"> 
+              <mat-form-field floatLabel="never">
+                <input matInput placeholder="Class" [value]="element.class" [(ngModel)]="element.class">
+              </mat-form-field>
+            </mat-cell>
+         </ng-container>
+         <ng-container matColumnDef="branch">
+            <mat-header-cell *matHeaderCellDef> Branch </mat-header-cell>
+            <mat-cell *matCellDef="let element"> 
+              <mat-form-field floatLabel="never">
+                <input matInput placeholder="Branch" [value]="element.branch" [(ngModel)]="element.branch">
+              </mat-form-field>
+            </mat-cell>
+         </ng-container>
+
+         <ng-container matColumnDef="star" stickyEnd>
+            <th mat-header-cell *matHeaderCellDef></th>
+            <td mat-cell *matCellDef="let element">
+                <button mat-icon-button (click)="editUser(element)">
+                    <mat-icon>edit</mat-icon>
+                  </button> 
+            </td>
+          </ng-container>
+      
+        <mat-header-row *matHeaderRowDef="displayedColumns_Users"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns_Users;"></mat-row>
+      </mat-table>
+</div>

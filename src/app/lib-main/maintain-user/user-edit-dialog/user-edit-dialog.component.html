@@ -1,0 +1,43 @@
+<h2 mat-dialog-title>Edit User</h2>
+<div mat-dialog-content>
+  <form>
+    <mat-form-field>
+      <mat-label>Member no</mat-label>
+      <input matInput [(ngModel)]="user.member_no" name="member_no" />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Name</mat-label>
+      <input matInput [(ngModel)]="user.member_name" name="member_name" />
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Category</mat-label>
+        <input matInput [(ngModel)]="user.category" name="category" />
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Course Duration</mat-label>
+        <input matInput [(ngModel)]="user.course_duration" name="course_duration" />
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Course - Start Year</mat-label>
+        <input matInput [(ngModel)]="user.course_year_start" name="course_year_start" />
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Course - End Year</mat-label>
+        <input matInput [(ngModel)]="user.course_year_end" name="course_year_end" />
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Class</mat-label>
+        <input matInput [(ngModel)]="user.class" name="class" />
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Branch</mat-label>
+        <input matInput [(ngModel)]="user.branch" name="branch" />
+    </mat-form-field>
+
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onDiscard()">Discard</button>
+  <button mat-button [mat-dialog-close]="data" (click)="storeUserData()" cdkFocusInitial>Save</button>
+</div>
+

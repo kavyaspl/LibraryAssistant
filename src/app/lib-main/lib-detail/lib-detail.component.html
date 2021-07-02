@@ -1,0 +1,151 @@
+<div>
+<form class="form">
+    <mat-form-field appearance="fill">
+      <mat-label>Member no.</mat-label>
+      <input type="text"
+             placeholder="Enter Member no."
+             [(ngModel)]="member_no"
+             matInput
+             [formControl]="myControl"
+             (keyup.enter)="onEnter(member_no)">
+    </mat-form-field>
+  </form>
+  <div *ngIf="hello">
+    <mat-toolbar color="primary">
+      <mat-toolbar-row>
+        <span>Member Details</span>
+        <span class="spacer"></span>  
+
+      </mat-toolbar-row>
+    </mat-toolbar>
+    <mat-table [dataSource]="enteredUser" class="mat-elevation-z8">
+ 
+        <ng-container matColumnDef="name">
+          <mat-header-cell *matHeaderCellDef> Name. </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.member_name}} </mat-cell>
+        </ng-container>
+      
+ 
+        <ng-container matColumnDef="category">
+          <mat-header-cell *matHeaderCellDef> Category</mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.category}} </mat-cell>
+        </ng-container>
+      
+    
+        <ng-container matColumnDef="course">
+          <mat-header-cell *matHeaderCellDef> Course </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.course_duration}} years</mat-cell>
+        </ng-container>
+      
+    
+        <ng-container matColumnDef="class">
+          <mat-header-cell *matHeaderCellDef> Class </mat-header-cell>
+          <mat-cell *matCellDef="let element"> {{element.class}} th year </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="branch">
+            <mat-header-cell *matHeaderCellDef> Branch </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.branch}} </mat-cell>
+         </ng-container>
+         <ng-container matColumnDef="duration">
+            <mat-header-cell *matHeaderCellDef> Duration </mat-header-cell>
+            <mat-cell *matCellDef="let element"> {{element.course_year_start}} - {{element.course_year_end}} </mat-cell>
+         </ng-container>
+      
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+      </mat-table>
+      <mat-toolbar color="primary">
+        <mat-toolbar-row>
+          <span>Books</span>
+          <span class="spacer"></span> 
+          <button mat-icon-button (click)="onSave()">
+            <mat-icon>save</mat-icon>
+          </button>
+          <button mat-icon-button (click)="toggleEdit()">
+           <mat-icon>edit</mat-icon>
+         </button>   
+        </mat-toolbar-row>
+      </mat-toolbar>
+      <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+ 
+        <ng-container matColumnDef="sno">
+          <mat-header-cell *matHeaderCellDef> S.no </mat-header-cell>
+          <mat-cell *matCellDef="let element; let i = index;"> {{ i+1 }} </mat-cell>
+        </ng-container>
+      
+ 
+        <ng-container matColumnDef="bookno">
+          <mat-header-cell *matHeaderCellDef>Book No.</mat-header-cell>
+          <mat-cell *matCellDef="let element; let i = index;">  
+          <mat-form-field floatLabel="never">
+            <input matInput placeholder="Book No." [value]="element.book_no" [(ngModel)]="element.book_no" (keyup.enter)="onRowEnter(i,element.book_no)">
+          </mat-form-field>
+        </mat-cell>
+        </ng-container>
+      
+    
+        <ng-container matColumnDef="title">
+          <mat-header-cell *matHeaderCellDef> Title </mat-header-cell>
+          <mat-cell *matCellDef="let element">
+          <mat-form-field floatLabel="never">
+            <input matInput placeholder="Title" [value]="element.title" [(ngModel)]="element.title">
+          </mat-form-field>
+        </mat-cell>
+        </ng-container>
+      
+    
+        <ng-container matColumnDef="author">
+          <mat-header-cell *matHeaderCellDef> Author </mat-header-cell>
+          <mat-cell *matCellDef="let element"> 
+            <mat-form-field floatLabel="never">
+              <input matInput placeholder="Author" [value]="element.author" [(ngModel)]="element.author">
+            </mat-form-field>
+          </mat-cell>
+        </ng-container>
+
+        <ng-container matColumnDef="rate">
+            <mat-header-cell *matHeaderCellDef> Rate </mat-header-cell>
+            <mat-cell *matCellDef="let element"> 
+              <mat-form-field floatLabel="never">
+                <input matInput placeholder="Rate" [value]="element.rate" [(ngModel)]="element.rate">
+              </mat-form-field>
+            </mat-cell>
+         </ng-container>
+         <ng-container matColumnDef="datetaken">
+            <mat-header-cell *matHeaderCellDef> Date Taken </mat-header-cell>
+            <mat-cell *matCellDef="let element">  
+              <mat-form-field floatLabel="never">
+                <input matInput [matDatepicker]="picker" placeholder="Date Taken" [value]="element.Date_take" [(ngModel)]="element.Date_take">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+            </mat-cell>
+         </ng-container>
+         <ng-container matColumnDef="datedue">
+          <mat-header-cell *matHeaderCellDef> Due Date </mat-header-cell>
+          <mat-cell *matCellDef="let element"> 
+            <mat-form-field floatLabel="never">
+              <input matInput [matDatepicker]="picker" placeholder="Due Date" [value]="element.Date_due" [(ngModel)]="element.Date_due">
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+          </mat-cell>
+       </ng-container>
+         <ng-container matColumnDef="datereturned">
+            <mat-header-cell *matHeaderCellDef> Date Returned </mat-header-cell>
+            <mat-cell *matCellDef="let element"> 
+              <mat-form-field floatLabel="never">
+                <input matInput [matDatepicker]="picker" placeholder="Date Returned" [value]="element.Date_return" [(ngModel)]="element.Date_return">
+                <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+            </mat-cell>
+         </ng-container>
+      
+        <mat-header-row *matHeaderRowDef="displayedColumns_Books"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns_Books;"></mat-row>
+      </mat-table>
+  </div>
+</div>
+

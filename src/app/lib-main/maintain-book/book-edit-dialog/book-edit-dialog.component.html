@@ -1,0 +1,40 @@
+<h2 mat-dialog-title>Edit Book</h2>
+<div mat-dialog-content>
+  <form>
+    <mat-form-field>
+      <mat-label>Book no</mat-label>
+      <input matInput [(ngModel)]="book.book_no" name="book_no" />
+    </mat-form-field>
+    <mat-form-field>
+      <mat-label>Title</mat-label>
+      <input matInput [(ngModel)]="book.title" name="titleField" />
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Author</mat-label>
+        <input matInput [(ngModel)]="book.author" name="authorField" />
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Rate</mat-label>
+        <input matInput [(ngModel)]="book.rate" name="rateField" />
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Taken By</mat-label>
+        <input matInput [(ngModel)]="book.member_no" name="membernoField" />
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Date Taken</mat-label>
+        <input matInput [(ngModel)]="book.Date_take" name="rateField" />
+    </mat-form-field>
+    <mat-form-field>
+        <mat-label>Due by</mat-label>
+        <input matInput [(ngModel)]="book.Date_due" name="rateField" />
+    </mat-form-field>
+
+
+  </form>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="onDiscard()">Discard</button>
+  <button mat-button [mat-dialog-close]="data" (click)="storeBookData()" cdkFocusInitial>Save</button>
+</div>
+
